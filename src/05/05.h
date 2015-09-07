@@ -2,10 +2,8 @@
 // Created by sztosz on 8/30/15.
 //
 
-#ifndef SDL2TUT_04_H
-#define SDL2TUT_04_H
-
-//#include <SDL_surface.h>
+#ifndef SDL2TUT_05_H
+#define SDL2TUT_05_H
 
 enum KeyPressSurfaces {
   KEY_PRESS_SURFACE_DEFAULT,
@@ -25,4 +23,4 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
-#endif //SDL2TUT_04_H
+#endif //SDL2TUT_05_H

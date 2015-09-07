@@ -14,4 +14,4 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
-#endif //SDL2TUT_02_H
+#endif //SDL2TUT_03_H
