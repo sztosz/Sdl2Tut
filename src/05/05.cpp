@@ -41,11 +41,18 @@ bool init() {
 }
 
 SDL_Surface *loadSurface(std::string path) {
+  SDL_Surface *optimizedSurface = NULL;
   SDL_Surface *loadedSurface = SDL_LoadBMP(path.c_str());
   if (loadedSurface == NULL) {
     std::cout << "Bitmap " << path.c_str() << " could not be loaded! SDL_Error: " << SDL_GetError() << "\n";
+  } else {
+    optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, NULL);
+    if (optimizedSurface == NULL) {
+      std::cout << "Bitmap " << path.c_str() << " could not be optimized! SDL_Error: " << SDL_GetError() << "\n";
+    }
+    SDL_FreeSurface(loadedSurface);
   }
-  return loadedSurface;
+  return optimizedSurface;
 }
 
 bool loadMedia() {
@@ -123,7 +130,12 @@ int main() {
             break;
         }
       }
-      SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+      SDL_Rect stretchRect;
+      stretchRect.x = 0;
+      stretchRect.y = 0;
+      stretchRect.w = SCREEN_WIDTH;
+      stretchRect.h = SCREEN_HEIGHT;
+      SDL_BlitScaled(gCurrentSurface, NULL, gScreenSurface, &stretchRect);
       SDL_UpdateWindowSurface(gWindow);
     }
   }
