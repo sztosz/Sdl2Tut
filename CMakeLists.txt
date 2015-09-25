@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.3)
 project(Sdl2Tut)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lSDL2 -lSDL2_image")
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(SDL2 REQUIRED)
@@ -22,3 +22,6 @@ target_link_libraries(Sdl2Tut04 ${SDL2_LIBRARY})
 
 add_executable(Sdl2Tut05 src/05/05.cpp)
 target_link_libraries(Sdl2Tut05 ${SDL2_LIBRARY})
+
+add_executable(Sdl2Tut06 src/06/06.cpp)
+target_link_libraries(Sdl2Tut06 ${SDL2_LIBRARY})
