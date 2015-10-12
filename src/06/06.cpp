@@ -17,7 +17,7 @@ SDL_Window *gWindow = nullptr;
 SDL_Surface *gScreenSurface = nullptr;
 
 //The image we will load and show on the screen
-SDL_Surface *gCurrentSurface;
+SDL_Surface *gCurrentSurface = nullptr;
 
 bool init() {
   bool success = false;
@@ -45,21 +45,6 @@ bool init() {
   return success;
 }
 
-SDL_Surface *loadSurface(std::string path) {
-  SDL_Surface *optimizedSurface = NULL;
-  SDL_Surface *loadedSurface = IMG_Load(path.c_str());
-  if (loadedSurface == NULL) {
-    std::cout << "Image " << path.c_str() << " could not be loaded! IMG_Error: " << IMG_GetError() << "\n";
-  } else {
-    optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, 0);
-    if (optimizedSurface == NULL) {
-      std::cout << "Image " << path.c_str() << " could not be optimized! SDL_Error: " << IMG_GetError() << "\n";
-    }
-    SDL_FreeSurface(loadedSurface);
-  }
-  return optimizedSurface;
-}
-
 bool loadMedia() {
   bool success = true;
   gCurrentSurface = loadSurface("06_extension_libraries_and_loading_other_image_formats/loaded.png");
@@ -76,6 +61,21 @@ void close() {
   SDL_DestroyWindow(gWindow);
   gWindow == nullptr;
   SDL_Quit();
+}
+
+SDL_Surface *loadSurface(std::string path) {
+  SDL_Surface *optimizedSurface = NULL;
+  SDL_Surface *loadedSurface = IMG_Load(path.c_str());
+  if (loadedSurface == NULL) {
+    std::cout << "Image " << path.c_str() << " could not be loaded! IMG_Error: " << IMG_GetError() << "\n";
+  } else {
+    optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, 0);
+    if (optimizedSurface == NULL) {
+      std::cout << "Image " << path.c_str() << " could not be optimized! SDL_Error: " << IMG_GetError() << "\n";
+    }
+    SDL_FreeSurface(loadedSurface);
+  }
+  return optimizedSurface;
 }
 
 int main() {
