@@ -25,3 +25,6 @@ target_link_libraries(Sdl2Tut05 ${SDL2_LIBRARY})
 
 add_executable(Sdl2Tut06 src/06/06.cpp)
 target_link_libraries(Sdl2Tut06 ${SDL2_LIBRARY})
+
+add_executable(Sdl2Tut07 src/07/07.cpp)
+target_link_libraries(Sdl2Tut06 ${SDL2_LIBRARY})
